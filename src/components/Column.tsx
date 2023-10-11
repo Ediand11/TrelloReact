@@ -1,31 +1,39 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
 
 type ColumnNameProps = {
   name: string;
+  onChangeName: (name: string) => void;
 };
 
 const Container = styled.div`
   background-color: #f4f5f7;
-  border-radius: 2.5px;
+  border-radius: 12px;
   width: 300px;
-  height: 475px;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
   border: 1px solid gray;
+  margin-right: 10px;
 `;
 
-const Title = styled.h3`
+const Input = styled.input`
+  border-radius: 12px;
+  margin: 0px;
   padding: 8px;
-  background-color: pink;
-  text-align: center;
+  border: none;
+  background-color: #f4f5f7;
+  width: 200px;
+  outline: none;
 `;
 
-const Column: FC<ColumnNameProps> = ({ name }) => {
+const Column: FC<ColumnNameProps> = ({ name, onChangeName }) => {
+  const [titleName, setTitleName] = useState<string>(name);
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newName = event.target.value;
+    setTitleName(newName);
+    onChangeName(newName);
+  };
   return (
     <Container>
-      <Title>{name}</Title>
+      <Input type="text" value={titleName} onChange={handleNameChange} />
     </Container>
   );
 };
