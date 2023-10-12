@@ -8,6 +8,8 @@ type CardProps = {
 };
 
 const CardContainer = styled.input`
+  width: 100%;
+
   margin: 8px;
   padding: 8px;
   background-color: white;
