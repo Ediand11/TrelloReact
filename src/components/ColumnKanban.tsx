@@ -8,8 +8,9 @@ type ColumnNameProps = {
   onChangeName: (name: string) => void;
   deleteColumn: () => void;
   tasks: Task[];
-  addNewTask: () => void;
+  addNewTask: (columnId: Id) => void;
   updateTask: (id: Id, content: string) => void;
+  deleteTask: (id: Id) => void;
 };
 
 const Container = styled.div`
@@ -54,6 +55,7 @@ const ColumnKanban: FC<ColumnNameProps> = ({
   tasks,
   addNewTask,
   updateTask,
+  deleteTask,
 }) => {
   return (
     <Container>
@@ -67,12 +69,11 @@ const ColumnKanban: FC<ColumnNameProps> = ({
         </Button>
       </div>
 
-      {tasks.map(
-        (task, index) =>
-          task.columnId === column.id && <Card key={index} task={task} updateTask={updateTask} />
-      )}
+      {tasks.map((task) => (
+        <Card key={task.id} task={task} deleteTask={deleteTask} updateTask={updateTask} />
+      ))}
 
-      <Button onClick={addNewTask}>Добавить карточку</Button>
+      <Button onClick={() => addNewTask(column.id)}>Добавить карточку</Button>
     </Container>
   );
 };

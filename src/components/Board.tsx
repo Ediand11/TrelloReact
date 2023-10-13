@@ -120,6 +120,10 @@ const Board: FC = () => {
     });
     setTasks([...newTasks]);
   }
+  function deleteTask(id: Id) {
+    const newTasks = tasks.filter((task) => task.id !== id);
+    setTasks([...newTasks]);
+  }
 
   return (
     <div
@@ -134,9 +138,10 @@ const Board: FC = () => {
           column={column}
           onChangeName={(newName) => handleNameChange(index, newName)}
           deleteColumn={() => deleteColumn(column.id)}
-          tasks={tasks}
-          addNewTask={() => createTask(column.id)}
+          tasks={tasks.filter((task) => task.columnId === column.id)}
+          addNewTask={createTask}
           updateTask={updateTask}
+          deleteTask={deleteTask}
         />
       ))}
       <CreateColumn addColumn={createNewColumn} />

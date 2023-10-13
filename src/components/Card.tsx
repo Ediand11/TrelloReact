@@ -1,14 +1,16 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Id } from "../types/types";
 
 type CardProps = {
   task: any;
   updateTask: (id: Id, content: string) => void;
+  deleteTask: (id: Id) => void;
 };
 
-const CardContainer = styled.input`
+const CardInput = styled.textarea`
   width: 100%;
+  height: auto;
 
   margin: 8px;
   padding: 8px;
@@ -16,6 +18,23 @@ const CardContainer = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
+  white-space: pre-wrap;
+  overflow: auto;
+  font: inherit;
+`;
+
+const CardSpan = styled.span`
+  max-width: 300px;
+  width: 100%;
+  margin: 8px;
+  padding: 8px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  white-space: pre-wrap;
+  overflow: auto;
+  overflow-wrap: break-word;
 `;
 
 const Button = styled.button`
@@ -31,16 +50,28 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Card: FC<CardProps> = ({ task, updateTask }) => {
+const Card: FC<CardProps> = ({ task, updateTask, deleteTask }) => {
+  const [editMode, setEditMode] = useState(true);
+
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <CardContainer
-        value={task.content}
-        onChange={(e) => {
-          updateTask(task.id, e.target.value);
-        }}
-      />
-      <Button>X</Button>
+      {editMode === true ? (
+        <CardInput
+          value={task.content}
+          onChange={(e) => {
+            updateTask(task.id, e.target.value);
+          }}
+          onBlur={() => setEditMode(false)}
+          autoFocus
+          onKeyDown={(e) => {
+            if (e.key !== "Enter") return;
+            setEditMode(false);
+          }}
+        />
+      ) : (
+        <CardSpan>{task.content}</CardSpan>
+      )}
+      <Button onClick={() => deleteTask(task.id)}>X</Button>
     </div>
   );
 };
