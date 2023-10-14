@@ -41,7 +41,7 @@ const Card: FC<CardProps> = ({ task, updateTask, deleteTask }) => {
       </div>
 
       {isPopupVisible && (
-        <Popup>
+        <Popup setVisible={setPopupVisible}>
           <h2>Popup Content</h2>
           <p>Дополнительная информация</p>
           <button onClick={handleCardClick}>Закрыть</button>
