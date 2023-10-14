@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import ColumnKanban from "./ColumnKanban";
 import { Column, Id, Task } from "../types/types";
-import { Button } from "./UI/StyledComponents";
+import { Button, Container } from "./UI/StyledComponents";
 
 const Board: FC = () => {
   const defaultColumns: Column[] = [
@@ -145,7 +145,9 @@ const Board: FC = () => {
           deleteTask={deleteTask}
         />
       ))}
-      <Button onClick={() => createNewColumn()}>Создать новую колонку</Button>
+      <Container>
+        <Button onClick={() => createNewColumn()}>Создать новую колонку</Button>
+      </Container>
     </div>
   );
 };
