@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import { Id, Task } from "../types/types";
+import { Button, Container, Input } from "./UI/StyledComponents";
 
 type ColumnNameProps = {
   column: any;
@@ -12,41 +13,6 @@ type ColumnNameProps = {
   updateTask: (id: Id, content: string) => void;
   deleteTask: (id: Id) => void;
 };
-
-const Container = styled.div`
-  box-sizing: border-box;
-
-  background-color: #f4f5f7;
-  border-radius: 12px;
-  width: 300px;
-
-  height: 100%;
-  border: 1px solid gray;
-  margin-right: 10px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-
-  border-radius: 12px;
-  margin: 0px;
-  padding: 8px;
-  border: none;
-  background-color: #f4f5f7;
-  outline: none;
-`;
-const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  border-radius: 12px;
-  padding: 8px;
-  border: none;
-  background-color: #f4f5f7;
-  outline: none;
-  cursor: pointer;
-`;
 
 const ColumnKanban: FC<ColumnNameProps> = ({
   column,
