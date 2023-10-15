@@ -5,7 +5,9 @@ export const Container = styled.div`
 
   background-color: #f4f5f7;
   border-radius: 12px;
-  width: 300px;
+  max-width: 300px;
+  width: 100%;
+  min-width: 150px;
 
   height: 100%;
   border: 1px solid gray;
@@ -36,8 +38,9 @@ export const Button = styled.button`
 `;
 
 export const CardTextArea = styled.textarea`
-  width: 100%;
   height: auto;
+  display: block;
+  max-width: 300px;
 
   margin: 8px;
   padding: 8px;
@@ -48,6 +51,7 @@ export const CardTextArea = styled.textarea`
   white-space: pre-wrap;
   overflow: auto;
   font: inherit;
+  resize: none;
 `;
 
 export const CardSpan = styled.span`

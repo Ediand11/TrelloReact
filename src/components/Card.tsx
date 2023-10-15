@@ -43,7 +43,18 @@ const Card: FC<CardProps> = ({ task, updateTask, deleteTask }) => {
       {isPopupVisible && (
         <Popup setVisible={setPopupVisible}>
           <h2>Popup Content</h2>
-          <p>Дополнительная информация</p>
+          <CardTextArea
+            value={task.content}
+            onChange={(e) => {
+              updateTask(task.id, e.target.value);
+            }}
+            onBlur={() => setEditMode(false)}
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key !== "Enter") return;
+              setEditMode(false);
+            }}
+          />
           <button onClick={handleCardClick}>Закрыть</button>
         </Popup>
       )}

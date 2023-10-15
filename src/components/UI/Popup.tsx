@@ -2,6 +2,7 @@ import React, { Children, FC, ReactNode } from "react";
 import styled from "styled-components";
 
 const PopupContainer = styled.div`
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;

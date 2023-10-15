@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import ColumnKanban from "./ColumnKanban";
 import { Column, Id, Task } from "../types/types";
 import { Button, Container } from "./UI/StyledComponents";
@@ -80,8 +80,13 @@ const Board: FC = () => {
     },
   ];
 
-  const [columns, setColumns] = useState<Column[]>(defaultColumns);
-  const [tasks, setTasks] = useState<Task[]>(defaultTasks);
+  const [columns, setColumns] = useState<Column[]>(
+    JSON.parse(localStorage.getItem("columns") || "null") || defaultColumns
+  );
+
+  const [tasks, setTasks] = useState<Task[]>(
+    JSON.parse(localStorage.getItem("tasks") || "null") || defaultTasks
+  );
 
   const handleNameChange = (index: number, newName: string) => {
     const newColumnNames = [...columns];
@@ -89,6 +94,15 @@ const Board: FC = () => {
     setColumns(newColumnNames);
   };
 
+  useEffect(() => {
+    localStorage.setItem("columns", JSON.stringify(columns));
+  }, [columns]);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  //Позже вынести функции в отдельный файл
   function createNewColumn() {
     const columnToAdd: Column = {
       id: Math.floor(Math.random() * 10001),
@@ -125,6 +139,7 @@ const Board: FC = () => {
     const newTasks = tasks.filter((task) => task.id !== id);
     setTasks([...newTasks]);
   }
+  //----------------------------------------------------------------
 
   return (
     <div
