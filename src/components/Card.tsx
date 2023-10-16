@@ -55,7 +55,7 @@ const Card: FC<CardProps> = ({ task, updateTask, deleteTask }) => {
               setEditMode(false);
             }}
           />
-          <button onClick={handleCardClick}>Закрыть</button>
+          <Button onClick={handleCardClick}>Закрыть</Button>
         </Popup>
       )}
     </div>

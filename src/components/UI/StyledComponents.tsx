@@ -40,8 +40,8 @@ export const Button = styled.button`
 export const CardTextArea = styled.textarea`
   height: auto;
   display: block;
-  max-width: 300px;
-
+  max-width: 100%;
+  width: 300px;
   margin: 8px;
   padding: 8px;
   background-color: white;
