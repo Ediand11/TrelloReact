@@ -9,9 +9,10 @@ type ColumnNameProps = {
   onChangeName: (name: string) => void;
   deleteColumn: () => void;
   tasks: Task[];
-  addNewTask: (columnId: Id) => void;
+  addNewTask: (user: string, columnId: Id) => void;
   updateTask: (id: Id, content: string) => void;
   deleteTask: (id: Id) => void;
+  user: string;
 };
 
 const ColumnKanban: FC<ColumnNameProps> = ({
@@ -22,6 +23,7 @@ const ColumnKanban: FC<ColumnNameProps> = ({
   addNewTask,
   updateTask,
   deleteTask,
+  user,
 }) => {
   return (
     <Container>
@@ -39,7 +41,7 @@ const ColumnKanban: FC<ColumnNameProps> = ({
         <Card key={task.id} task={task} deleteTask={deleteTask} updateTask={updateTask} />
       ))}
 
-      <Button onClick={() => addNewTask(column.id)}>Добавить карточку</Button>
+      <Button onClick={() => addNewTask(user, column.id)}>Добавить карточку</Button>
     </Container>
   );
 };

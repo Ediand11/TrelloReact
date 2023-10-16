@@ -67,3 +67,13 @@ export const CardSpan = styled.span`
   overflow: auto;
   overflow-wrap: break-word;
 `;
+
+export const Header = styled.div`
+  display: flex;
+  max-height: 50px;
+  width: 100%;
+  background-color: blue;
+
+  padding: 10px;
+  margin-bottom: 10px;
+`;
