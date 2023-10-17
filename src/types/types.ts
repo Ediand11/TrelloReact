@@ -5,9 +5,15 @@ export type Column = {
   title: string;
 };
 
+export type Comment = {
+  authorComment: string;
+  contentComment: string;
+};
+
 export type Task = {
   id: Id;
   columnId: Id;
   content: string;
   author: string;
+  comments?: Comment[];
 };

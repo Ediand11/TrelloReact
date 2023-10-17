@@ -19,6 +19,24 @@ const Board: FC = () => {
       columnId: "todo",
       content: "List admin APIs for dashboard",
       author: "Test User",
+      comments: [
+        {
+          authorComment: "Test User",
+          contentComment: "Test Comment",
+        },
+        {
+          authorComment: "Test User",
+          contentComment: "Test Comment",
+        },
+        {
+          authorComment: "Test User",
+          contentComment: "Test Comment",
+        },
+        {
+          authorComment: "Test User",
+          contentComment: "Test Comment",
+        },
+      ],
     },
     {
       id: "2",
@@ -62,12 +80,24 @@ const Board: FC = () => {
       columnId: "todo",
       content: "Optimize application performance",
       author: "Test User",
+      comments: [
+        {
+          authorComment: "Test User",
+          contentComment: "Test Comment",
+        },
+      ],
     },
     {
       id: "9",
       columnId: "todo",
       content: "Implement data validation",
       author: "Test User",
+      comments: [
+        {
+          authorComment: "Test User",
+          contentComment: "Test Comment",
+        },
+      ],
     },
     {
       id: "10",

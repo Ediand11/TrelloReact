@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Id } from "../types/types";
+import { Id, Task } from "../types/types";
 import Popup from "./UI/Popup";
 import { CardSpan, CardTextArea } from "./UI/CardItems";
 import { Button } from "./UI/Button";
 
 type CardProps = {
-  task: any;
+  task: Task;
   updateTask: (id: Id, content: string) => void;
   deleteTask: (id: Id) => void;
 };
@@ -56,6 +56,11 @@ const Card: FC<CardProps> = ({ task, updateTask, deleteTask }) => {
               setEditMode(false);
             }}
           />
+          {/* {task.comments?.map((comment) => (
+            <CardSpan>{comment.authorComment}</CardSpan>
+          ))}
+          Доделать рендер комментов
+          */}
           <Button onClick={handleCardClick}>Закрыть</Button>
         </Popup>
       )}
