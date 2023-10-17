@@ -102,7 +102,9 @@ const Board: FC = () => {
     JSON.parse(localStorage.getItem("tasks") || "null") || defaultTasks
   );
 
-  const [user, setUser] = useState<string>(JSON.parse(localStorage.getItem("user") || ""));
+  const [user, setUser] = useState<string>(
+    JSON.parse(localStorage.getItem("user") || "null") || ""
+  );
 
   const handleNameChange = (index: number, newName: string) => {
     const newColumnNames = [...columns];
@@ -135,6 +137,8 @@ const Board: FC = () => {
   function deleteColumn(id: Id) {
     const filteredColumns = columns.filter((col) => col.id !== id);
     setColumns(filteredColumns);
+    const newTasks = tasks.filter((task) => task.columnId !== id);
+    setTasks([...newTasks]);
   }
 
   function createTask(userName: string, columnId: Id) {
