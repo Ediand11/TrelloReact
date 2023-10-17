@@ -2,7 +2,8 @@ import React, { FC, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import { Id, Task } from "../types/types";
-import { Button, Container, Input } from "./UI/StyledComponents";
+import { Container, Input } from "./UI/BoardItems";
+import { Button } from "./UI/Button";
 
 type ColumnNameProps = {
   column: any;

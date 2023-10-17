@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Id } from "../types/types";
-import { Button, CardSpan, CardTextArea } from "./UI/StyledComponents";
 import Popup from "./UI/Popup";
+import { CardSpan, CardTextArea } from "./UI/CardItems";
+import { Button } from "./UI/Button";
 
 type CardProps = {
   task: any;

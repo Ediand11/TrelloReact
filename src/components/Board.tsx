@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import ColumnKanban from "./ColumnKanban";
 import { Column, Id, Task } from "../types/types";
-import { Button, Container, Header, Input } from "./UI/StyledComponents";
+import { Container, Header, Input } from "./UI/BoardItems";
 import Popup from "./UI/Popup";
+import { Button } from "./UI/Button";
 
 const Board: FC = () => {
   const defaultColumns: Column[] = [
