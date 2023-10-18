@@ -4,6 +4,7 @@ import { Id, Task } from "../types/types";
 import Popup from "./UI/Popup";
 import { CardSpan, CardTextArea } from "./UI/CardItems";
 import { Button } from "./UI/Button";
+import CommentItem from "./UI/CommentItem";
 
 type CardProps = {
   task: Task;
@@ -56,11 +57,14 @@ const Card: FC<CardProps> = ({ task, updateTask, deleteTask }) => {
               setEditMode(false);
             }}
           />
-          {/* {task.comments?.map((comment) => (
-            <CardSpan>{comment.authorComment}</CardSpan>
+          {task.comments?.map((comment) => (
+            <CommentItem
+              key={task.id}
+              authorComment={comment.authorComment}
+              contentComment={comment.contentComment}
+            />
           ))}
-          Доделать рендер комментов
-          */}
+
           <Button onClick={handleCardClick}>Закрыть</Button>
         </Popup>
       )}
