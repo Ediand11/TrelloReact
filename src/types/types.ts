@@ -6,6 +6,7 @@ export type Column = {
 };
 
 export type Comment = {
+  idComment: Id;
   authorComment: string;
   contentComment: string;
 };

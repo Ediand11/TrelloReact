@@ -13,6 +13,7 @@ type ColumnNameProps = {
   addNewTask: (user: string, columnId: Id) => void;
   updateTask: (id: Id, content: string) => void;
   deleteTask: (id: Id) => void;
+  addComment: (id: Id, content: string, authorComment?: string) => void;
   user: string;
 };
 
@@ -24,6 +25,7 @@ const ColumnKanban: FC<ColumnNameProps> = ({
   addNewTask,
   updateTask,
   deleteTask,
+  addComment,
   user,
 }) => {
   return (
@@ -39,7 +41,13 @@ const ColumnKanban: FC<ColumnNameProps> = ({
       </div>
 
       {tasks.map((task) => (
-        <Card key={task.id} task={task} deleteTask={deleteTask} updateTask={updateTask} />
+        <Card
+          key={task.id}
+          task={task}
+          addComment={addComment}
+          deleteTask={deleteTask}
+          updateTask={updateTask}
+        />
       ))}
 
       <Button onClick={() => addNewTask(user, column.id)}>Добавить карточку</Button>

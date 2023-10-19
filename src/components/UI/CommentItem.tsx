@@ -1,13 +1,19 @@
 import React, { FC } from "react";
 import { Comment } from "../../types/types";
 import { CardSpan } from "./CardItems";
-import ResizableTextarea from "./ResizableTextarea";
+import styled from "styled-components";
+
+const CommentSpan = styled.span`
+  display: block;
+  padding: 8px;
+  margin: 8px;
+  width: 100%;
+`;
 
 const CommentItem: FC<Comment> = ({ authorComment, contentComment }) => {
   return (
     <>
-      <ResizableTextarea />
-      <span style={{ paddingBottom: "10px" }}>{`${authorComment}: ${contentComment}`}</span>
+      <CommentSpan>{`${authorComment}: ${contentComment}`}</CommentSpan>
     </>
   );
 };

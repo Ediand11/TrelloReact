@@ -4,6 +4,7 @@ import { Column, Id, Task } from "../types/types";
 import { Container, Header, Input } from "./UI/BoardItems";
 import Popup from "./UI/Popup";
 import { Button } from "./UI/Button";
+import { Comment } from "../types/types";
 
 const Board: FC = () => {
   const defaultColumns: Column[] = [
@@ -21,18 +22,22 @@ const Board: FC = () => {
       author: "Test User",
       comments: [
         {
+          idComment: "1",
           authorComment: "Test User",
           contentComment: "Test Comment",
         },
         {
+          idComment: "2",
           authorComment: "Test User",
           contentComment: "Test Comment",
         },
         {
+          idComment: "3",
           authorComment: "Test User",
           contentComment: "Test Comment",
         },
         {
+          idComment: "4",
           authorComment: "Test User",
           contentComment: "Test Comment",
         },
@@ -82,6 +87,7 @@ const Board: FC = () => {
       author: "Test User",
       comments: [
         {
+          idComment: "22",
           authorComment: "Test User",
           contentComment: "Test Comment",
         },
@@ -94,6 +100,7 @@ const Board: FC = () => {
       author: "Test User",
       comments: [
         {
+          idComment: "11",
           authorComment: "Test User",
           contentComment: "Test Comment",
         },
@@ -183,11 +190,16 @@ const Board: FC = () => {
     setTasks([...tasks, newTask]);
   }
 
-  function updateTask(id: Id, content: string) {
+  function updateTask(id: Id, content: string | Comment) {
     const newTasks = tasks.map((task) => {
       if (task.id !== id) return task;
-      return { ...task, content };
+      if (typeof content === "string") return { ...task, content };
+      return {
+        ...task,
+        comments: task.comments ? [...task.comments, content] : [content],
+      };
     });
+
     setTasks([...newTasks]);
   }
 
@@ -195,6 +207,17 @@ const Board: FC = () => {
     const newTasks = tasks.filter((task) => task.id !== id);
     setTasks([...newTasks]);
   }
+
+  function addComment(taskId: Id, contentComment: string, authorComment: string = user) {
+    const newComment: Comment = {
+      idComment: Math.floor(Math.random() * 10001),
+      contentComment,
+      authorComment,
+    };
+
+    updateTask(taskId, newComment);
+  }
+
   //----------------------------------------------------------------
 
   const [isPopupVisibleUser, setIsPopupVisibleUser] = useState<boolean>(() => !user);
@@ -232,6 +255,7 @@ const Board: FC = () => {
             addNewTask={createTask}
             updateTask={updateTask}
             deleteTask={deleteTask}
+            addComment={addComment}
             user={user}
           />
         ))}

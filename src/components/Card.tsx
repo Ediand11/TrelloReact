@@ -6,15 +6,17 @@ import { CardSpan, CardTextArea } from "./UI/CardItems";
 import { Button } from "./UI/Button";
 import CommentItem from "./UI/CommentItem";
 
-type CardProps = {
+type TCardProps = {
   task: Task;
   updateTask: (id: Id, content: string) => void;
   deleteTask: (id: Id) => void;
+  addComment: (id: Id, content: string, authorComment?: string) => void;
 };
 
-const Card: FC<CardProps> = ({ task, updateTask, deleteTask }) => {
+const Card: FC<TCardProps> = ({ task, updateTask, deleteTask, addComment }) => {
   const [editMode, setEditMode] = useState(true);
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [comment, setComment] = useState("");
 
   const handleCardClick = () => {
     setPopupVisible((state) => !state);
@@ -46,6 +48,7 @@ const Card: FC<CardProps> = ({ task, updateTask, deleteTask }) => {
         <Popup setVisible={setPopupVisible}>
           <h2>Popup Content</h2>
           <CardTextArea
+            style={{ height: "100px" }}
             value={task.content}
             onChange={(e) => {
               updateTask(task.id, e.target.value);
@@ -57,9 +60,31 @@ const Card: FC<CardProps> = ({ task, updateTask, deleteTask }) => {
               setEditMode(false);
             }}
           />
+          <h3>Comment</h3>
+
+          <form>
+            <CardTextArea
+              value={comment}
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+              placeholder={"Введите ваш комментарий"}
+            />
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                addComment(task.id, comment);
+                setComment("");
+              }}
+            >
+              Добавить коммент
+            </Button>
+          </form>
+
           {task.comments?.map((comment) => (
             <CommentItem
-              key={task.id}
+              key={comment.idComment}
+              idComment={comment.idComment}
               authorComment={comment.authorComment}
               contentComment={comment.contentComment}
             />
