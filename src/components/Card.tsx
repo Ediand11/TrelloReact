@@ -10,10 +10,10 @@ type TCardProps = {
   updateTask: (id: Id, content: string) => void;
   deleteTask: (id: Id) => void;
   addComment: (id: Id, content: string, authorComment?: string) => void;
-  deleteComment: (id: Id) => void;
+  deleteComment: (taskId: Id, commentId: Id) => void;
 };
 
-const Card: FC<TCardProps> = ({ task, updateTask, deleteTask, addComment }) => {
+const Card: FC<TCardProps> = ({ task, updateTask, deleteTask, addComment, deleteComment }) => {
   const [editMode, setEditMode] = useState(true);
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [comment, setComment] = useState("");
@@ -87,8 +87,8 @@ const Card: FC<TCardProps> = ({ task, updateTask, deleteTask, addComment }) => {
               idComment={comment.idComment}
               authorComment={comment.authorComment}
               contentComment={comment.contentComment}
-              deleteTask={() => {
-                deleteTask(comment.idComment);
+              deleteComment={() => {
+                deleteComment(task.id, comment.idComment);
               }}
             />
           ))}

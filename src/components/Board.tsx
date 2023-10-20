@@ -218,14 +218,20 @@ const Board: FC = () => {
     updateTask(taskId, newComment);
   }
 
-  function deleteComment(id: Id) {
-    let newTasks;
+  function deleteComment(taskId: Id, commentId: Id) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        const updatedComments =
+          task.comments?.filter((comment) => comment.idComment !== commentId) || [];
+        return {
+          ...task,
+          comments: updatedComments,
+        };
+      }
+      return task;
+    });
 
-    // for (const task of tasks){
-    //   newTasks = task.comments.filter((comment) => comment.idComment !== id) : null;
-    // }
-
-    // setTasks(newTasks);
+    setTasks(updatedTasks);
   }
 
   //----------------------------------------------------------------
