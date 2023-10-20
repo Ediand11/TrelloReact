@@ -1,5 +1,4 @@
-import React, { FC, useState } from "react";
-import styled from "styled-components";
+import { FC } from "react";
 import Card from "./Card";
 import { Id, Task } from "../types/types";
 import { Container, Input } from "./UI/BoardItems";
@@ -14,6 +13,7 @@ type ColumnNameProps = {
   updateTask: (id: Id, content: string) => void;
   deleteTask: (id: Id) => void;
   addComment: (id: Id, content: string, authorComment?: string) => void;
+  deleteComment: (id: Id) => void;
   user: string;
 };
 
@@ -26,6 +26,7 @@ const ColumnKanban: FC<ColumnNameProps> = ({
   updateTask,
   deleteTask,
   addComment,
+  deleteComment,
   user,
 }) => {
   return (
@@ -47,6 +48,7 @@ const ColumnKanban: FC<ColumnNameProps> = ({
           addComment={addComment}
           deleteTask={deleteTask}
           updateTask={updateTask}
+          deleteComment={deleteComment}
         />
       ))}
 

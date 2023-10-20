@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { Comment } from "../../types/types";
-import { CardSpan } from "./CardItems";
+import { FC } from "react";
+import { Comment, Id } from "../../types/types";
 import styled from "styled-components";
+import { Button } from "./Button";
 
 const CommentSpan = styled.span`
   display: block;
@@ -10,10 +10,15 @@ const CommentSpan = styled.span`
   width: 100%;
 `;
 
-const CommentItem: FC<Comment> = ({ authorComment, contentComment }) => {
+const CommentItem: FC<Comment & { deleteTask: () => void }> = ({
+  authorComment,
+  contentComment,
+  deleteTask,
+}) => {
   return (
     <>
       <CommentSpan>{`${authorComment}: ${contentComment}`}</CommentSpan>
+      <button onClick={deleteTask}>X</button>
     </>
   );
 };

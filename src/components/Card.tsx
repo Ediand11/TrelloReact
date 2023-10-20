@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
-import styled from "styled-components";
+import { FC, useState } from "react";
 import { Id, Task } from "../types/types";
 import Popup from "./UI/Popup";
 import { CardSpan, CardTextArea } from "./UI/CardItems";
@@ -11,6 +10,7 @@ type TCardProps = {
   updateTask: (id: Id, content: string) => void;
   deleteTask: (id: Id) => void;
   addComment: (id: Id, content: string, authorComment?: string) => void;
+  deleteComment: (id: Id) => void;
 };
 
 const Card: FC<TCardProps> = ({ task, updateTask, deleteTask, addComment }) => {
@@ -87,6 +87,9 @@ const Card: FC<TCardProps> = ({ task, updateTask, deleteTask, addComment }) => {
               idComment={comment.idComment}
               authorComment={comment.authorComment}
               contentComment={comment.contentComment}
+              deleteTask={() => {
+                deleteTask(comment.idComment);
+              }}
             />
           ))}
 

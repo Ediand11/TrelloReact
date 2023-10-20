@@ -218,6 +218,16 @@ const Board: FC = () => {
     updateTask(taskId, newComment);
   }
 
+  function deleteComment(id: Id) {
+    let newTasks;
+
+    // for (const task of tasks){
+    //   newTasks = task.comments.filter((comment) => comment.idComment !== id) : null;
+    // }
+
+    // setTasks(newTasks);
+  }
+
   //----------------------------------------------------------------
 
   const [isPopupVisibleUser, setIsPopupVisibleUser] = useState<boolean>(() => !user);
@@ -256,6 +266,7 @@ const Board: FC = () => {
             updateTask={updateTask}
             deleteTask={deleteTask}
             addComment={addComment}
+            deleteComment={deleteComment}
             user={user}
           />
         ))}
