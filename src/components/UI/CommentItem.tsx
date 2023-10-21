@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Comment, Id } from "../../types/types";
 import styled from "styled-components";
 import { Button } from "./Button";
+import { CardTextArea } from "./CardItems";
 
 const CommentContainer = styled.div`
   display: flex;
@@ -32,16 +33,33 @@ const CommentButton = styled.button`
   cursor: pointer;
 `;
 
-const CommentItem: FC<Comment & { deleteComment: () => void }> = ({
-  authorComment,
-  contentComment,
-  deleteComment,
-}) => {
+const CommentItem: FC<
+  Comment & { deleteComment: () => void; updateComment: (content: string) => void }
+> = ({ authorComment, contentComment, deleteComment, updateComment }) => {
+  const [editMode, setEditMode] = useState(false);
+
   return (
     <CommentContainer>
-      <CommentSpan>{`${authorComment}: ${contentComment}`}</CommentSpan>
+      {editMode ? (
+        <CardTextArea
+          value={contentComment}
+          onChange={(e) => {
+            updateComment(e.target.value);
+          }}
+          placeholder={"Введите ваш комментарий"}
+          onBlur={() => setEditMode(false)}
+          autoFocus
+          onKeyDown={(e) => {
+            if (e.key !== "Enter") return;
+            setEditMode(false);
+          }}
+        />
+      ) : (
+        <CommentSpan>{`${authorComment}: ${contentComment}`}</CommentSpan>
+      )}
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <CommentButton onClick={deleteComment}>x</CommentButton>
+        <CommentButton onClick={() => setEditMode(true)}>Ed</CommentButton>
       </div>
     </CommentContainer>
   );

@@ -234,6 +234,29 @@ const Board: FC = () => {
     setTasks(updatedTasks);
   }
 
+  function updateComment(taskId: Id, commentId: Id, content: string) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        const updatedComments = (task.comments || []).map((comment) => {
+          if (comment.idComment === commentId) {
+            return {
+              ...comment,
+              contentComment: content,
+            };
+          }
+          return comment;
+        });
+
+        return {
+          ...task,
+          comments: updatedComments,
+        };
+      }
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  }
   //----------------------------------------------------------------
 
   const [isPopupVisibleUser, setIsPopupVisibleUser] = useState<boolean>(() => !user);
@@ -273,6 +296,7 @@ const Board: FC = () => {
             deleteTask={deleteTask}
             addComment={addComment}
             deleteComment={deleteComment}
+            updateComment={updateComment}
             user={user}
           />
         ))}

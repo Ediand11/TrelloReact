@@ -14,6 +14,7 @@ type ColumnNameProps = {
   deleteTask: (id: Id) => void;
   addComment: (id: Id, content: string, authorComment?: string) => void;
   deleteComment: (taskId: Id, commentId: Id) => void;
+  updateComment: (taskId: Id, commentId: Id, content: string) => void;
   user: string;
 };
 
@@ -27,6 +28,7 @@ const ColumnKanban: FC<ColumnNameProps> = ({
   deleteTask,
   addComment,
   deleteComment,
+  updateComment,
   user,
 }) => {
   return (
@@ -49,6 +51,7 @@ const ColumnKanban: FC<ColumnNameProps> = ({
           deleteTask={deleteTask}
           updateTask={updateTask}
           deleteComment={deleteComment}
+          updateComment={updateComment}
         />
       ))}
 
